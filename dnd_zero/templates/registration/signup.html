@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block central %}
+
+    <h2>New Master</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Create my account"></p>
+    </form>
+
+{% endblock %}

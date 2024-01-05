@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block title %}<title>DND Zero</title>{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'firstapp/css/style_new.css' %}" />
+</head>
+
+<body>
+    {% block headbar %}
+    <div class="header">
+        <div class="container header-container">
+
+            <div class="container logo-container">
+                <a href="{% url 'Handbook' %}"><img class="logo" src="{% static 'firstapp/images/logo/dnd_zero.png' %}" alt='DND Zero' width="150" height="50"></a>
+            </div>
+
+            <div class="navigation-container">
+                <a href="{% url 'Handbook' %}" class="nav-link">Handbook</a>
+                <a href="{% url 'Legends' %}" class="nav-link">Legends</a>
+                <a href="{% url 'my-characters' %}" class="nav-link">My Characters</a>
+                <a href="{% url 'About' %}" class="nav-link">About</a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'Characters' %}" class="nav-link">All Characters</a>
+                {% endif %}
+
+            </div>
+
+            <div class="user-container">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'master-detail' username=user.username %}" class="log-link">{{user.get_username}}</a>
+                    <a href="{% url 'master-detail' username=user.username %}"><img class="master_logo" src="#" alt='Master logo' width="50" height="50"></a>
+                {% else %}
+                    <a href="{% url 'login'%}" class="log-link">Login</a>
+                    <a href="{% url 'register'%}" class="log-link">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    <div class="body-container">
+        <div class="left-block">
+        </div>
+
+        <div class="center-block">
+            {% block content %}{% endblock%}
+        </div>
+
+        <div class="right-block">
+
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2023
+    </div>
+
+</body>
+
+</html>
