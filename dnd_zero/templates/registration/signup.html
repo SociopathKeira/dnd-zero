@@ -2,11 +2,11 @@
 
 {% block central %}
 
-    <h2>New Master</h2>
+<h2 xmlns="http://www.w3.org/1999/html">New Master</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <p><input type="submit" value="Create my account"></p>
+        <button type="submit">Create account</button>
     </form>
 
 {% endblock %}

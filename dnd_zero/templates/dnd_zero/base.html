@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'firstapp/css/style_new.css' %}" />
+    <link rel="stylesheet" href="{% static 'dnd_zero/css/style.css' %}" />
 </head>
 
 <body>
@@ -16,27 +16,27 @@
         <div class="container header-container">
 
             <div class="container logo-container">
-                <a href="{% url 'Handbook' %}"><img class="logo" src="{% static 'firstapp/images/logo/dnd_zero.png' %}" alt='DND Zero' width="150" height="50"></a>
+                <a href="{% url 'home' %}"><img class="logo" src="{% static 'firstapp/images/logo/dnd_zero.png' %}" alt='DND Zero' width="150" height="50"></a>
             </div>
 
             <div class="navigation-container">
-                <a href="{% url 'Handbook' %}" class="nav-link">Handbook</a>
-                <a href="{% url 'Legends' %}" class="nav-link">Legends</a>
-                <a href="{% url 'my-characters' %}" class="nav-link">My Characters</a>
-                <a href="{% url 'About' %}" class="nav-link">About</a>
+                <a href="{% url 'handbook' %}" class="nav-link">Handbook</a>
+                <a href="{% url 'legends' %}" class="nav-link">Legends</a>
+                <a href="{% url 'about' %}" class="nav-link">About</a>
+                <a href="{% url 'my_characters' %}" class="nav-link">My Characters</a>
                 {% if user.is_superuser %}
-                    <a href="{% url 'Characters' %}" class="nav-link">All Characters</a>
+                    <a href="{% url 'all_characters' %}" class="nav-link">All Characters</a>
                 {% endif %}
 
             </div>
 
             <div class="user-container">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'master-detail' username=user.username %}" class="log-link">{{user.get_username}}</a>
-                    <a href="{% url 'master-detail' username=user.username %}"><img class="master_logo" src="#" alt='Master logo' width="50" height="50"></a>
+                    <a href="{% url 'master_detail' user.username %}" class="log-link">{{ user.get_username }}</a>
+                    <a href="{% url 'master_detail' user.get_username %}"><img class="master_logo" src="#" alt='Master logo' width="50" height="50"></a>
                 {% else %}
-                    <a href="{% url 'login'%}" class="log-link">Login</a>
-                    <a href="{% url 'register'%}" class="log-link">Register</a>
+                    <a href="{% url 'signup'%}" class="log-link">Sign Up</a>
+                    <a href="{% url 'signin'%}" class="log-link">Log in</a>
                 {% endif %}
             </div>
         </div>
@@ -45,14 +45,15 @@
 
     <div class="body-container">
         <div class="left-block">
+            {% block left %}{% endblock%}
         </div>
 
         <div class="center-block">
-            {% block content %}{% endblock%}
+            {% block central %}{% endblock%}
         </div>
 
         <div class="right-block">
-
+            {% block right %}{% endblock%}
         </div>
     </div>
 

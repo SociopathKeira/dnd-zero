@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block central %}
 <h1>DND Zero Home</h1>
 
-<p>Welcome to <em>DND Zero</em></p>
+    <p>Welcome to <em>DND Zero</em></p>
 
 
-<h1>Nothing about</h1>
-
+    <h1>Nothing about</h1>
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'signout' %}">Logout</a></li>
+    {% endif %}
 {% endblock %}

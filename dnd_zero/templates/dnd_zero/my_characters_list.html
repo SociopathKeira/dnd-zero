@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block central %}
+    <h1>My Characters</h1>
+
+    {% if character_list %}
+    <ul>
+      {% for character in character_list %}
+      <li>
+        <a href="{{ character.get_absolute_url }}">{{ character.name }}</a> ({{ character.get_race_display }}) ({{ character.level }})
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>There are no characters in the tavern.</p>
+    {% endif %}
+    <a href="/create_character/">Create new Character</a>
+{% endblock %}
